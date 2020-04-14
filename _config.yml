@@ -97,7 +97,7 @@ analytics:
 author:
   name             : "SH LEE"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I Want to be an amazing **UX DESIGNER**."
+  bio              : "I want to be an amazing **Lifesytle Designer**."
   location         : "South Korea"
   email            : sounmind777@gmail.com
   links:
@@ -276,6 +276,7 @@ defaults:
       type: posts
     values:
       layout: single
+      classes: wide
       author_profile: true
       read_time: true
       comments: # true
