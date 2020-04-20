@@ -14,8 +14,6 @@ theme                    : "minimal-mistakes-jekyll"
 # remote_theme             : "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-remote_theme : mmistakes/minimal-mistakes
-
 # Site Settings
 locale                   : "en-US"
 title                    : "BE WILLING TO ENJOY IT"
