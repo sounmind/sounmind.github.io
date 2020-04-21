@@ -113,15 +113,18 @@ tags: [web, boostcourse, programming]
 </project>
 ```
 
-3. Spring MVC를 사용하기 위한 설정을 한다.
-3.1 Spring MVC에서 DispatcherServlet이 FrontController의 역할을 한다. 따라서 **DispatcherServlet을 FrontController로 설정**해야 한다. 그 방법은 3가지가 있다.
-**3.1.1 ```web.xml``` 파일에 설정:**
-*이전에 서블릿 하나 생성하면, servlet과 servlet mapping이라는 xml 태그에다 각각의 값들을 넣어줘서 설정했었다.*
-3.1.1
-3.1.2 ```javax.servlet.ServletContainerInitializer``` 사용
-3.1.3 ```org.springframework.web.WebApplicationInitializer``` 인터페이스를 구현해서 사용
+#### 3.1.3 Spring MVC를 사용하기 위해 DispatcherServlet을 FrontController로 설정하기
+> Spring MVC에서 DispatcherServlet이 FrontController의 역할을 한다. 따라서 **DispatcherServlet을 FrontController로 설정**해야 한다. 그 방법은 3가지가 있다.
 
-- 이 중에서 첫 번째와 세 번째 방법이 많이 사용된다.
+- **```web.xml``` 파일에 설정:**
+이전에 서블릿 하나 생성하면, servlet과 servlet mapping이라는 xml 태그에다 각각의 값들을 넣어줘서 설정했었다.
+  - servlet-name은 servlet mapping이 갖고 있는 servlet-name과 일치하기만 하면 된다.
+  - servelt-class가 실제로 사용자가 동작시킬 클래스를 의미한다. 이때 Spring이 제공하고 있는 DispatcherServlet을 이용할 것이다. 따라서 반드시 패키지 명을 포함해서 Spring이 제공하고 있는 클래스 명을 제대로 넣어줘야 한다.
+  - init-param에서, DispatcherServlet의 경우 Spring에서 제공하고 있기 때문에 실제로 사용자가 무슨 일을 하고 싶은지에 대한 정보는 알 수가 없다. 따라서 init-param에는 그런 정보를 입력한다.
+
+
+2. ```javax.servlet.ServletContainerInitializer``` 사용
+3. ```org.springframework.web.WebApplicationInitializer``` 인터페이스를 구현해서 사용
 
 
 ### 3.2 Controller 작성 실습 (2/3)
