@@ -27,6 +27,7 @@ tags: [web, boostcourse, programming]
 #### 3.1.1 maven 프로젝트를 만든다.
 > archetypes의 Artifact id은 ```maven-archetype-webapp```으로 한다.
 #### 3.1.2 ```pom.xml```에 필요한 부분들을 추가한다.
+
 ```java    
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
