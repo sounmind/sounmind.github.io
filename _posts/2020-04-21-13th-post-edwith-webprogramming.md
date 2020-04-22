@@ -25,7 +25,9 @@ tags: [web, boostcourse, programming]
 2. 웹 브라우저에게 2개의 값을 입력하고 버튼을 클릭하면 ```http://localhost:8080/mvcexam/plus``` URL로 2개의 입력 값이 POST 방식으로 서버에게 전달된다. 서버는 2개의 값을 더한 후, 그 결과 값을 JSP에게 request scope로 전달하여 출력한다.
 
 #### 3.1.1 maven 프로젝트를 만든다.
+
 > archetypes의 Artifact id은 ```maven-archetype-webapp```으로 한다.
+
 #### 3.1.2 ```pom.xml```에 필요한 부분들을 추가한다.
 
 ```java    
