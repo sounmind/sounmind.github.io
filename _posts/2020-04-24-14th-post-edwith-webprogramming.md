@@ -95,10 +95,10 @@ ${value1} 더하기 ${value2} (은/는) ${result} 입니다.
     - 3.2. 요청1: **plusform url로 요청(get 방식)이 들어오면, 2개의 값 입력 받을 수 있는 입력 창과 버튼이 있는 화면 출력**
     - 3.3. 요청2: **plus url로 요청이 들어오면, 2개의 입력 값이 post 방식으로 서버에 전달되어, 서버는 그것을 더하고 결과 값을 jsp에게 request scope로 전달** 후 출력  
 
-    #### 그리고 아래 어노테이션을 한 번 살펴보자.
+#### 그리고 아래 어노테이션을 한 번 살펴보자.
     
-    #### @RequestMapping
-    
+#### @RequestMapping
+
      - Http 요청과 이를 다루기 위한 Controller의 메소드를 연결하는 어노테이션
         - Http Method와 연결하는 방법은 다양하다
         - @RequestMapping("/users", method=RequestMethod.POST)
@@ -106,25 +106,25 @@ ${value1} 더하기 ${value2} (은/는) ${result} 입니다.
           - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping
         - 그렇다. 이 어노테이션(@RequestMapping)을 사용해야 한다는 것을 알 수 있다.
 
-    #### Spring MVC가 지원해주는 것들
+#### Spring MVC가 지원해주는 것들
     
     또한 Spring MVC가 지원하는 **Controller 메소드 인수 타입**, **메소드 인수 어노테이션**, **메소드 리턴 값** 의 종류가 다양하다. 선언만 해서 사용할 수 있도록 Spring이 만들어주기 때문에 잘 활용해야 한다.
 
-    #### 예: @RequestParam
+#### 예: @RequestParam
     
     - Mapping된 메소드의 Argument에 붙일 수 있는 어노테이션
     - @RequestParam의 name에는 http parameter의 name과 맵핑이 된다.
       - 예: html form tag input의 name 속성과 맵핑된다.
     - @RequestParam의 required: 필수인지 아닌지 판단.
 
-    #### 예(2): @PathVariable
+#### 예(2): @PathVariable
     
     - url에 '?변수=값' 방식을 사용할 때, 넘겨온 값을 받기 위해 사용된다.
     - @RequestMapping의 path에 변수명을 입력받기 위한 place holder가 필요하다.
     - place holder의 이름과 PathVariable의 name 값이 같으면 맵핑된다.
     - required 속성은 default true이다.
 
-    #### 예(3): @RequestHeader
+#### 예(3): @RequestHeader
     
     - 요청 정보의 헤더 정보를 읽어 들일 때 사용한다.
     - @RequestHeader(name="헤더명") String 변수명
