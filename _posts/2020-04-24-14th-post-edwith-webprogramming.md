@@ -124,9 +124,12 @@ ${value1} 더하기 ${value2} (은/는) ${result} 입니다.
 - 요청 정보의 헤더 정보를 읽어 들일 때 사용한다.
 - @RequestHeader(name="헤더명") String 변수명
 
+
 > 변수명을 잘 입력하는 것이 중요하다
 
+
 > ##### /mvcexam/src/main/java/kr/or/connect/mvcexam/controller/PlusController.java
+
 
 ```java
 package kr.or.connect.mvcexam.controller;
