@@ -44,7 +44,7 @@ tags: [web, boostcourse, programming]
 2. 웹 브라우저에게 2개의 값을 입력하고 버튼을 클릭하면 **```http://localhost:8080/mvcexam/plus``` URL로** 2개의 입력 값이 **POST 방식으로 서버에게 전달된다.** **서버는** 2개의 값을 더한 후, **그 결과 값을 JSP에게 request scope로 전달하여 출력한다.**
 
 ### 실습
-1. 입력 두 개 받아내는 plusForm.jsp 파일 만들기
+##### 1. 입력 두 개 받아내는 plusForm.jsp 파일 만들기
 
 > #####  /mvcexam/src/main/webapp/WEB-INF/views/plusForm.jsp
 
@@ -68,7 +68,7 @@ value2 : <input type="text" name="value2"><br>
 </html>
 ```
 
-2. plusform으로부터 요청을 받았을 때 처리해서 출력할 plusResult.jsp 만들기
+##### 2. plusform으로부터 요청을 받았을 때 처리해서 출력할 plusResult.jsp 만들기
 
 > ##### /mvcexam/src/main/webapp/WEB-INF/views/plusResult.jsp
 
@@ -87,7 +87,7 @@ ${value1} 더하기 ${value2} (은/는) ${result} 입니다.
 </html>
 ```
 
-3. **핵심!**: (따로 패키지에) 컨트롤러 클래스(PlusController.java) 만들기
+##### 3. **핵심!**: (따로 패키지에) 컨트롤러 클래스(PlusController.java) 만들기
     - 3.1. 컨트롤러라는 것을 나타낼 **@Controller 어노테이션** 붙이기
 
     자, 다시 실습 목표를 살펴보면, 컨트롤러는 요청 2개를 받아서 처리해야 한다.
