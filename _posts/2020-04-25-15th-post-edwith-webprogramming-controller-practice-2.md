@@ -27,6 +27,7 @@ tags: [web, boostcourse, programming]
 3. regist에서는 입력받은 결과를 콘솔 화면에 출력한다.
 
 > #### /mvcexam/src/main/webapp/WEB-INF/views/userform.jsp
+
 ```html
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -50,6 +51,7 @@ age: <input type="text" name="age"><br>
 ---
 
 > #### /mvcexam/src/main/java/kr/or/connect/mvcexam/controller/UserController.java
+
 ```java
 package kr.or.connect.mvcexam.controller;
 
@@ -82,6 +84,7 @@ public class UserController {
 ---
 
 > #### /mvcexam/src/main/java/kr/or/connect/mvcexam/dto/User.java
+
 ```java
 package kr.or.connect.mvcexam.dto;
 
@@ -121,6 +124,7 @@ public class User {
 ---
 
 > #### /mvcexam/src/main/webapp/WEB-INF/views/regist.jsp
+
 ```html
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -144,6 +148,7 @@ public class User {
 3. 서버는 HttpServletRequest를 이용해서 사용자가 요청한 PATH 정보를 콘솔에 출력한다.
 
 > #### /mvcexam/src/main/webapp/WEB-INF/views/goodsById.jsp
+
 ```html
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -164,6 +169,7 @@ path: ${path } <br>
 ---
 
 > #### /mvcexam/src/main/java/kr/or/connect/mvcexam/controller/GoodsController.java
+
 ```java
 package kr.or.connect.mvcexam.controller;
 
