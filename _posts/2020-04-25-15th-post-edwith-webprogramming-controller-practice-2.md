@@ -161,6 +161,8 @@ path: ${path } <br>
 </html>
 ```
 
+---
+
 > #### /mvcexam/src/main/java/kr/or/connect/mvcexam/controller/GoodsController.java
 ```java
 package kr.or.connect.mvcexam.controller;
@@ -206,5 +208,3 @@ public class GoodsController {
 ---
 ---
 ---
-
-### 3.3 Controller 작성 실습 (3/3)
