@@ -19,7 +19,7 @@ tags: [web, boostcourse, programming]
 
 비지니스 메소드를 별도의 서비스 객체에서 구현하도록 하고 컨트롤러는 Service 객체를 사용하도록 한다.
 
-![1](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/2020-04-27-1.png)
+![1](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/2020-04-27-1.png?raw=true)
 
 ## 2. 서비스 객체란?
 
@@ -74,7 +74,7 @@ tags: [web, boostcourse, programming]
 
 ---
 
-![2](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/2020-04-27-2.png)
+![2](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/2020-04-27-2.png?raw=true)
 
 ### Layers
 
