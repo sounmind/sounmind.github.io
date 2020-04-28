@@ -77,6 +77,90 @@ tags: [web, boostcourse, programming]
 
 ---
 
+## 4. 실제로 만들어보기, index.jsp에서 리다이렉트까지
+
+### Maven Project: guestbook 생성
+
+1. **pom.xml에 필요한 libraries 추가하고 maven 업데이트 하기**
+    - properties
+        1. spring version 정보 추가
+        2. json 이용하기 위한 jackson library version 정보 추가
+    - dependency (artifact ids below)
+        1. spring-context
+        2. spring-webmvc
+        3. javax.servlet-api (Servlet)
+        4. javax.servlet.jsp-api
+        5. jstl
+        6. spring-jdbc
+        7. spring-tx (트랜지션)
+        8. mysql-connector-java (mysql 드라이버)
+        9. commons-dbcp2 (data source 사용)
+        10.  jackson-databind (json 사용)
+        11. jackson-datatype-jdk8 (json 사용)
+    - Build - plugin
+        1. maven-compiler-plugin (jdk 1.8 사용)
+2. Navigator → guestbook → .settings → ~facet.core.xml → web module 을 version="3.1"로 수정.
+3. guestbook → properties → project facets → Dynamic Web Module version 이 3.1로 바뀌어있는지 확인.
+4. 설정 파일: src/main/main/java 아래에 kr.or.connect.guestbook.config 패키지 만들기
+    1.  Dispatcher Servlet이 읽어들이는 설정 파일 →**웹 레이어 설정 파일:**  `WebMvcContextConfiguration` 생성 (`WebMvcConfigurerAdapter` 상속 → 내가 원하는 설정들을 하기 위해)
+        1. `@Configuration` → 설정이라는 것을 알려주기
+        2. `@EnableWebMvc` → 기본적인 설정들을 자동으로 해주기 위해
+        3. `@ComponentScan` → 컨트롤러를 알아서 읽어오기 위해
+        4. 필요한 메서드들 @Override
+            1. `addResourceHandlers`
+                - URL 요청이 **특정한 방식**으로 들어오는 것들을 **특정한 폴더에서 읽어오도록** 처리
+            2. `configureDefaultServletHandling`
+                - `configurer.enable();`→ default servlet handler를 사용하게 한다.
+                - 매핑 정보가 없는 URL 요청이 들어왔을 때, Spring의 default servlet handler가 처리하도록 한다.
+                - 매핑이 없는 URL이 넘어왔을 때 WAS의 default servlet이 static한 자원을 읽어서 보여줄 수 있게끔 해주는 설정
+            3. `addViewController`
+                - 특정 URL에 대한 처리를 컨트롤러 클래스를 작성하지 않고 매핑할 수 있도록 해준다.
+                - "/"라고 요청이 들어오면 "index"라는 이름의 뷰로 보여준다.
+            4. `InternalResourceViewResolver`
+                - 적절한 view resolver가 실제로 뷰의 이름을 가지고 어떤 뷰인지에 대한 정보를 찾아낼 수 있게 한다.
+                - resolver에다 Prefix와 Suffix를 지정하게 함으로써 index가 들어왔을 때 /WEB-INF/views 라는 디렉터리 밑에 있는 index.jsp를 출력한다.
+    2. 데이터베이스 관련 설정: `DBConfig` ← `TransactionManagementConfigurer` 구현(Implements) ← 사용자 간의 트랜잭션 처리를 위한 `PlatformTransactionManager`을 설정하기 위한 조건(1)
+        1. `@Configuration`
+        2. `@EnableTransactionManagement` → 트랜잭션과 관련된 설정을 자동으로 해준다.
+        3. 필요한 메서드 @Override
+            1.  `annotationDrivenTransactionManager` ← **사용자 간의 트랜잭션 처리를 위한 `PlatformTransactionManager`을 설정하기 위한 조건(2)**: 해당 메서드에서 트랜잭션을 처리할 `PlatformTransactionManager()` 객체를 반환하게 하면 된다.
+                - 현재 `transactionManager()`를 호출하고 있음.
+        4. `@Bean`
+            1. `transactionManager()`  메서드
+                - `PlatformTransactionManager()` 를 리턴하고 있다.
+            2. 데이터베이스 연결하기 위해 사용했었던 DataSource Bean 등록
+    3. **비지니스, 레파지토리 레이어 설정 파일:** `ApplicationConfig` 작성
+        1. `@Configuration`
+        2. @ComponentScan → basePackages에 각각의 패키지를 지정하여 Dao나 Service에 구현되어 있는 컴포넌트들을 읽어온다.
+        3. @Import → DBConfig.class → Dao와 Service를 사용할 때 DBConfig에서 사용되고 있는 것들을 쓰기 위해
+    4. web.xml 설정
+        1. 웹 모듈 2.3으로 지정되어 있는 것 version="1.0"으로 수정
+        2.
+        3. \<context-param\>
+            1. \<param-name\>contextClass
+                - \<param-value\>org.springframework.web.context.support.**AnnotationConfigWebApplicationContext → 리스너가 실행될 때 이런  ApplicationContext 를 이용하겠다는 뜻**
+            2. \<param-name\>**contextConfigLocation**
+                - \<param-value\>kr.or.connect.guestbook.config.**ApplicationConfig** → **listener가 실행될 때 참고하는 파일 이름이 이 이름과 같아야 한다.**
+        4. \<listener\>
+            1. \<listener-class\>org.springframework.web.context.**ContextLoaderListener → 서버가 올라갈 때, Context가 로딩되는 이벤트가 일어났을 때 실행된다.**
+                - **이 리스너가 실행될 때, context-param에 등록된 이름의 파일을 가져다 사용한다.**
+        5. \<servlet\>
+            1. \<servlet-class\>org.springframework.web.servlet.DispatcherServlet → 모든 요청을 받을 때, 이 DispatcherServlet 클래스가 받는다. → **프론트 서블릿으로 등록**
+        6. \<init-param\>
+            1. \<param-name\>**contextClass**
+                - \<param-value\> org.springframework.web.context.support.**AnnotationConfigWebApplicationContext** →**DispatcherServlet을 실행할 때 이런 ApplicationContext 를 이용하겠다는 뜻**
+            2. \<param-name\>**contextConfigLocation**
+                - \<param-value\>kr.or.connect.guestbook.config.**WebMvcContextConfiguration** → **DispatcherServlet이 실행될 때 WebMvcContextConfiguration에 들어있는 설정들을 참고하겠다는 뜻.**
+        7. \<servlet-mapping\>
+            - **\<url-pattern\>/\<url-pattern\> → 모든 요청을 다 받는다는 뜻**
+        8. \<filter\> 요청이 수행되기 전, 응답이 나가기 전 수행된다.
+            1. \<filter-name\>encodingFilter
+                1. \<filter-class\>org.springframework.web.filter.ChracterEncodingFilter
+                2. **\<url-pattern\>/*\</url-pattern\> → 모든 요청에 대하여 필터 적용**
+5. webapp → WEB-INF → views 디렉터리 생성, index.jsp 파일 작성
+    1. 방명록 요구사항 → "index"라는 요청이 들어왔을 때 "list"라는 요청으로 redirect 한다.
+        - `response.sendRedirect("list");`
+
 ---
 
 ---
@@ -100,3 +184,9 @@ tags: [web, boostcourse, programming]
         2. Spring 개념 복습
         3. 강의 영상 하나하나 따라가면서 나만의 방식으로 재구성하기
             - 아톰 보다는 노션이 가독성이 좋으므로, 노션으로 빠르게 의사코드로 프로그램의 구조를 분석해보자.
+        4. 이제까지 잊고 있었던 궁금한 것들 리스트 만들기
+            1. 왜 하필 Maven project를 만드는 것일까?
+            2. WAS는 무엇이었지? 웹 애플리케이션 서버. 미들웨어.
+                - 웹 애플리케이션과 서버 환경을 만들어 동작시키는 기능을 제공하는 소프트웨어 프레임워크이다. [웹 애플리케이션 서버](https://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_%EC%84%9C%EB%B2%84)
+
+            3. 자바에서 **구현(Implements)** 의 의미는 무엇일까? 자바는 어설프게 배워 중요한 개념을 이해하지 못하는 것 같다. 자바의 정석 책을 봐야겠다!
