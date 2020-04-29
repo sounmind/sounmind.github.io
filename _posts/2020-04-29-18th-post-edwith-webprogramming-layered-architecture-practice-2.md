@@ -45,18 +45,23 @@ tags: [web, boostcourse, programming]
             - 해당 이름의 테이블이 가지고 있는 필들을 선언해주고 getter setter 메서드와 toString 메서드까지 오버라이딩한다.
     3. dao 패키지를 만들고 guestbookDao, logDao 2개의 클래스를 만든다.
         1. `@Repository`
-        2.
+        2. `.usingGeneratedKeyColumns("id");` → 자동으로 id 값 생성
+        3. `insertAction.executeAndReturnKey` 메서드 → insert 문을 내부적으로 생성해서 실행하고, 자동으로 생성된 id 값을 리턴.
+    4. GuestbookDaoSqls 클래스 생성해서 쿼리들을 관리한다.
+        1. limit → 시작 값, 끝날 때의 값들을 설정해서 특정한 부분만 select 할 수 있다.
+    5. GuestbookDao 클래스 생성
+        1. @Repository
+        2. static으로 GuestbookDaoSqls를 import해서 사용
+    6. 테스트하는 클래스 생성
+
+        ---
+
+        ---
+
+        ---
+
+## 2020-04-29 배운 것과 느낀 점
 
 ---
 
----
-
----
-
-## 2020-00-00 배운 것과 느낀 점
-
----
-
-1.
-2.
-3.
+1. 가볍게 배운 DTO, DAO 실습
