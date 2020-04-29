@@ -36,7 +36,7 @@ tags: [web, boostcourse, programming]
 1. 실제 테이블을 입력한다.
     1. mysql 실행 후 테이블 생성
 
-        ![1](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/20-04-29-1.png?raw=true)
+        ![1](https://github.com/sounmind/sounmind.github.io/blob/master/_posts/img/20-04-29-1.PNG?raw=true)
 
     2. dto 패키지를 만들고 guestbook과 log 2개의 클래스를 만든다.
         1. guestbook
