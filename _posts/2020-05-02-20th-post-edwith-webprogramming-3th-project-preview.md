@@ -1,0 +1,143 @@
+---
+title: "edwith 웹프로그래밍 3번째 프로젝트 프리뷰"
+date: 2020-05-02 23:39:00 +09:00
+categories: programming
+tags: [web, boostcourse, programming]
+---
+
+# BE_PJT C-1. 예약: 메인페이지 (리뷰 비용: 21,000원)
+
+동영상에 나온 각 카테고리 탭의 전체 수는 제공하는 dml.sql 에 있는 전체 수와 다를 수 있습니다.
+
+## 1. 프로젝트 개요
+
+---
+
+> 이번 프로젝트에서는 인터넷 예약관리 시스템을 만들어보겠습니다.
+**실제 네이버에서 운영하는 예약 시스템과 유사한 서비스입니다.전시, 연극, 뮤지컬 등의 콘텐츠가 보이고, 각 아이템을 예약할 수 있어야 합니다.**
+물론 네이버 예약 서비스는 이 순간에도 계속 변경되고 있습니다.
+따라서 여러분들이 지금 만들 예정인 서비스와 실제 네이버 예약서비스와는 약간 차이가 있을 겁니다. ^^
+여러분들은 저희가 제공한 기획서 내용과, 데모 사이트를 살펴보시면서 개발하시면 됩니다.
+이번 파트부터 마지막 파트까지는 총 4단계로 이어지는 규모가 큰 프로젝트입니다.
+그만큼 완성도 있는 결과를 만들 수 있고, 더불어 개발의 복잡도가 올라갈 겁니다.
+**이번 파트에서는 전체 예약서비스 중에 '메인화면'을 구성합니다.**
+서비스 기능 면으로는 일부분이지만, 개발환경 구축 등을 해야 하므로 가장 많은 시간이 들어갈 수 있는 파트입니다.
+그만큼 많은 시간 투자가 예상됩니다.
+
+### 기획서와 프로젝트 데모 영상
+
+[네이버 edwtith 홈페이지에서 보기](https://www.edwith.org/boostcourse-web/project/8/content/7#summary)
+
+---
+
+---
+
+---
+
+## 2. 프로젝트 개발 스펙
+
+---
+
+### **웹프론트엔드 기술요구사항**
+
+- DOMContentloaded 이후에 모든 자바스크립트 로직이 동작하게 합니다.
+- 상단영역의 애니메이션은 CSS3의 transition과 transform 속성을 활용해서 구현해야 합니다.
+- TABUI로 구성되는 카테고리 아이템이 노출되는 영역의 HTML은 카테고리별로 각각 만들지 않고 하나로 만들어 재사용합니다.
+- 카테고리 탭을 선택할 때마다, Ajax 요청을 해서 데이터를 가져와야 합니다.
+- 탭 메뉴 (전시/뮤지컬/콘서트 등)는 Event delegation으로 구현합니다.
+- Template 코드를 javascript 함수 안에 보관하지 않고, 별도 분리시켜서 사용해야 합니다. (HTML에 script태그 안에 보관한다던가)
+- 함수 하나에 여러 개의 기능을 넣지 않고, 함수를 여러 개로 분리합니다.
+
+### **웹백엔드 기술요구사항**
+
+- 제공된 SQL을 이용해서 테이블을 생성하고, 샘플데이터를 입력합니다.
+- maven을 이용해서 웹 어플리케이션 프로젝트를 작성합니다.
+- 학습했던 것처럼 controller,service,dao로 레이어드 아키텍쳐를 구성합니다.
+- spring JDBC를 이용하여 주어진 테이블로부터 입력, 수정, 삭제, 조회하는 DAO와 DTO를 작성합니다.
+- 서비스 인터페이스를 작성하고 해당 서비스 인터페이스에 비지니스 메소드를 작성합니다.
+- 서비스 인터페이스를 구현하는 클래스를 작성합니다.
+- 해당 구현 클래스의 메소드에 적절한 트랜잭션에 관련된 애노테이션을 사용합니다.
+- 클라이언트에게 Web API를 제공하기 위해 RestController 를 작성합니다.
+
+---
+
+---
+
+---
+
+## **3. 프로젝트 개발과정 참고**
+
+---
+
+### **1. maven 프로젝트를 생성합니다.**
+
+groupId 와 artifactId 는 임의로 지정합니다.
+
+### **2. MySQL 에서 프로젝트에 사용할 database 와 사용자 계정을 생성합니다.**
+
+생성한 데이터베이스와 계정정보는 src/main/resources/application.properties 파일에 다음과 같이 설정합니다.
+
+```java
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://domain:port/dbName?useUnicode=true&characterEncoding=utf8
+spring.datasource.username=dbUserName
+spring.datasource.password=dbPasswd
+```
+
+### **3. 생성한 데이터베이스에 접속하여 주어진 sql을 실행합니다.**
+
+먼저 ddl.sql의 내용을 실행하여 테이블을 생성하고, dml.sql의 내용을 실행하여 샘플 데이터를 추가합니다.
+
+### **4. sample이미지가 있는 압축파일인 img.zip을 webapp 폴더에 압축 해제합니다.**
+
+webapp폴더에 img와 img_map 폴더 아래에 샘플 이미지가 위치합니다.
+
+### **5. Spring MVC, Spring JDBC를 사용하기 위한 Spring설정 파일들을 작성합니다.**
+
+### **6. 샘플 데이터를 읽어 들여 메인화면을 출력하기 위한 DTO, Controller, Service, Repository를 알맞게 작성합니다.**
+
+### **7. web API 스펙은 아래와 같습니다.**
+
+**카테고리 목록 구하기 [API 스펙 & test](http://49.236.147.192:9090/swagger-ui.html#/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC%20API/getCategoriesUsingGET)**
+
+- GET (카테고리 목록 구하기): /api/categories
+
+**상품 목록 구하기 [API 스펙 & test](http://49.236.147.192:9090/swagger-ui.html#/%EC%83%81%ED%92%88%20API/getProductsUsingGET)**
+
+- GET (상품 목록 구하기): /api/products
+
+**프로모션 정보 구하기 [API 스펙 & test](http://49.236.147.192:9090/swagger-ui.html#/)**
+
+- GET (프로모션 목록 구하기): /api/promotions
+
+### **8. image type 설명**
+
+- th: thumbnail (썸네일 사진 - 상품리스트 혹은 프로모션 정보에서 보여주는 이미지)
+- ma: main (메인 사진 - 상품 상세정보에서 보여주는 이미지)
+- et: etc (기타 사진 - 상품 상세정보에서 추가적으로 보여주는 기타 이미지)
+
+### reservation.v1.5.zip
+
+이 파일들은 이번 프로젝트인 프로젝트3부터 프로젝트6까지 사용합니다. 다운로드 받은 파일을 압축 해제하면 resevation-html-base 디렉토리가 있는데 여기에서 제공하는 파일들을 이용하여 FE에 필요한 코드를 작성합니다. 필요에 따라 임의로 수정하셔도 괜찮습니다.
+
+---
+
+---
+
+---
+
+## [평가기준표](https://www.edwith.org/boostcourse-web/project/8/content/7#evaluation)
+
+---
+
+
+
+---
+
+---
+
+---
+
+## [제출](https://www.edwith.org/boostcourse-web/project/8/content/7#submission)
+
+---
