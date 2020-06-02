@@ -1,6 +1,6 @@
 ---
 title: "자료구조와 함께 배우는 알고리즘 입문 (1) 알고리즘 기본"
-date: 2020-05-02 23:39:00 +09:00
+date: 2020-06-02 23:39:00 +09:00
 categories: programming
 tags: [algorithm, datastructure, programming, book, IT]
 ---
