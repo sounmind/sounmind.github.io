@@ -41,6 +41,80 @@ java.util에 패키지에 속한 Random 클래스는 Java가 제공하는 아주
 
 # 두 배열 비교
 
+먼저 두 배열의 길이를 비교합니다. 그리고 두 배열의 첫번째 요소부터 마지막 요소까지 비교합니다.
+
 # 기수 변환
+
+정숫값을 임의의 기수로 변환하는 알고리즘.
+
+```
+package chap02;
+import java.util.Scanner;
+// 입력 받은 10진수를 2진수~36진수로 기수 변환하여 나타냄
+
+class CardConvRev {
+    // 정숫값 x를 r진수로 변환하여 배열 d에 아랫자리부터 넣어두고 자릿수를 반환합니다.
+    static int cardConvR(int x, int r, char[] d) {
+        int digits = 0;                        // 변환 후의 자릿수
+        String dchar = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        do {
+            d[digits++] = dchar.charAt(x % r);    // r로 나눈 나머지를 저장
+            x /= r;
+        } while (x != 0);
+        return digits;
+    }
+
+    public static void main(String[] args) {
+        Scanner stdIn = new Scanner(System.in);
+        int no;                            // 변환하는 정수
+        int cd;                            // 기수
+        int dno;                        // 변환 후의 자릿수
+        int retry;                        // 다시 한 번?
+        char[] cno = new char[32];        // 변환 후 각 자리의 숫자를 넣어두는 문자의 배열
+
+        System.out.println("10진수를 기수 변환합니다.");
+        do {
+            do {
+                System.out.print("변환하는 음이 아닌 정수：");
+                no = stdIn.nextInt();
+            } while (no < 0);
+
+            do {
+                System.out.print("어떤 진수로 변환할까요? (2~36)：");
+                cd = stdIn.nextInt();
+            } while (cd < 2 || cd > 36);
+
+            dno = cardConvR(no, cd, cno);        // no를 cd진수로 변환
+
+            System.out.print(cd + "진수로는 ");
+            for (int i = dno - 1; i >= 0; i--)    // 윗자리부터 차례로 나타냄
+                System.out.print(cno[i]);
+            System.out.println("입니다.");
+
+            System.out.print("한 번 더 할까요? (1.예／0.아니오)：");
+            retry = stdIn.nextInt();
+        } while (retry == 1);
+    }
+}
+```
+
+# String 클래스
+
+문자열을 나타내는 것은 java.lang 패키지에 소속된 String 클래스이다. 이 형은 (int, double 형 같이) 기본형이 아니다. String형 변수의 전형적인 선언은 다음과 같다.
+
+```
+String s = "ABC";
+```
+
+초기자의 "ABC"는 문자열 리터럴이다. 문자열 리터럴은 단순히 문자가 늘어서 잇는 것이 아니라 String형 인스턴스에 대한 참조이다. String 클래스는 문자열을 넣어두기 위한 문자 배열, 문자 수를 나타내는 필드 등을 갖고 있는 클래스이다. 따라서 변수 s와 그것이 참조하는 인스턴스는 이미지는 다음과 같다.
+
+(그림: 변수 s가 "ABC"라고 적혀있는 박스를 참조한다. 그런데 그 박스 안에는 문자배열(`private final char[]`)안의 ABC, 문자 수(`private final int`)안의 3 값, 등 여러 작은 박스(인스턴스)가 들어가 있다.)
+
+-   여기서 final 개념이 나왔는데 무슨 의미일까 궁금해서 찾아봤다. final은 상수, 메서드, 클래스 등을 선언하고 초기화한 뒤 변경하지 못하게 할 때 사용된다고 한다.  
+    출처: [https://m.blog.naver.com/PostView.nhn?blogId=goddlaek&logNo=220889229659&proxyReferer=https:%2F%2Fwww.google.com%2F](https://m.blog.naver.com/PostView.nhn?blogId=goddlaek&logNo=220889229659&proxyReferer=https:%2F%2Fwww.google.com%2F)
+
+`final char[]`형 배열의 요소에는 앞쪽부터 순서대로 문자 'A', 'B', 'C'가 들어 있다. 그리고 문자 수를 나타내는 final형 필드에는 3이 들어 있다. String 클래스에는 이 그림에 나타난 것 이외에도 필드, 생성사, 메서드가 있다.  
+**즉, 예전에 String을 가지고 몇 번째 문자를 가져오거나, 문자 수를 세거나, 문자열들이 서로 같은지를 비교할 수 있었던 것은 모두 String이 단순한 문자열이 아니라, 여러 인스턴스와 메서드를 가진 클래스 String 형 변수였기 때문이었다!!!**
 
 # 소수의 나열
