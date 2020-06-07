@@ -11,7 +11,7 @@ tags: [algorithm, datastructure, programming, book, IT]
 
 그래서 처음 아래와 같은 프로그램을 작성한다면, 나눗셈을 하는 횟수가 너무 많아진다.
 
-[https://k.kakaocdn.net/dn/mZZ66/btqEG8kWlsM/3PUqPgVyFkx70GEHDJ2fDk/img.png]
+![](https://k.kakaocdn.net/dn/mZZ66/btqEG8kWlsM/3PUqPgVyFkx70GEHDJ2fDk/img.png)
 
 책에서는 위와 같은 문제를 해결하기 위해 아래와 같은 코드를 제시했다. 아래 알고리즘은 배열을 이용했고, 정수 n 이 소수이려면,
 
