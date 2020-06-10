@@ -1,5 +1,5 @@
 ---
-title: "자료구조와 함께 배우는 알고리즘 입문 (4) 소수의 나열"
+title: "자료구조와 함께 배우는 알고리즘 입문 (4) 다차원 배열"
 date: 2020-06-10 23:58:00 +09:00
 categories: programming
 tags: [algorithm, datastructure, programming, book, IT]
